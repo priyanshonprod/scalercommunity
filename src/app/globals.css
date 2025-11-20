@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --foreground-rgb: 26, 26, 46;
+  --background-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+/* Code block styling */
+pre {
+  @apply bg-scaler-dark text-white p-4 overflow-x-auto my-4;
+}
+
+code {
+  @apply bg-gray-100 text-scaler-blue px-1.5 py-0.5 text-sm;
+}
+
+pre code {
+  @apply bg-transparent text-white p-0;
+}
+
+/* Portable text styling */
+.prose h1 {
+  @apply text-2xl font-bold mb-4 mt-6;
+}
+
+.prose h2 {
+  @apply text-xl font-semibold mb-3 mt-5;
+}
+
+.prose h3 {
+  @apply text-lg font-semibold mb-2 mt-4;
+}
+
+.prose p {
+  @apply mb-4 leading-relaxed;
+}
+
+.prose ul {
+  @apply list-disc pl-6 mb-4;
+}
+
+.prose ol {
+  @apply list-decimal pl-6 mb-4;
+}
+
+.prose li {
+  @apply mb-2;
+}
+
+.prose a {
+  @apply text-scaler-blue hover:text-scaler-blue-dark underline;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-scaler-blue pl-4 italic my-4 text-gray-600;
+}
+
+/* Search input styling */
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* Vote button animations */
+.vote-btn {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+.vote-btn:hover {
+  @apply scale-110;
+}
+
+.vote-btn:active {
+  @apply scale-95;
+}
