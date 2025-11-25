@@ -23,15 +23,13 @@ export default function RootLayout({
         <header className="bg-scaler-dark text-white">
           <div className="max-w-6xl mx-auto px-4 py-4">
             <nav className="flex items-center justify-between">
-              <a href="/knowledge" className="flex items-center gap-3">
-                {/* Scaler Logo */}
-                <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="40" height="40" fill="#2563EB"/>
-                  <path d="M12 28V12h4v12h8v4H12z" fill="white"/>
-                  <path d="M20 12h8v4h-8v-4z" fill="white"/>
+              <a href="/knowledge" className="flex items-center gap-2">
+                {/* Scaler Logo - Arrow/Graduation Cap */}
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-                <span className="text-xl font-bold">
-                  <span className="text-scaler-blue">Scaler</span> Knowledge Hub
+                <span className="text-xl font-bold tracking-tight">
+                  SCALER
                 </span>
               </a>
               <div className="flex items-center gap-4">

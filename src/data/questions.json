@@ -1,0 +1,92 @@
+[
+  {
+    "_id": "1",
+    "title": "What is the time complexity of binary search?",
+    "slug": "binary-search-time-complexity",
+    "category": "dsa",
+    "tags": ["algorithms", "searching", "big-o"],
+    "excerpt": "Binary search is a fundamental algorithm that efficiently finds a target value within a sorted array...",
+    "body": "Binary search is a fundamental algorithm that efficiently finds a target value within a sorted array. Understanding its time complexity is crucial for technical interviews.",
+    "answer": {
+      "body": "Binary search has a time complexity of O(log n), where n is the number of elements in the array.\n\n**Why O(log n)?**\n\nWith each comparison, binary search eliminates half of the remaining elements. If you start with n elements:\n- After 1st comparison: n/2 elements remain\n- After 2nd comparison: n/4 elements remain\n- After kth comparison: n/2^k elements remain\n\nThe search ends when n/2^k = 1, which gives us k = log₂(n).\n\n**Example Code:**\n```javascript\nfunction binarySearch(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n  \n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n    if (arr[mid] === target) return mid;\n    if (arr[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}\n```",
+      "resources": [
+        { "title": "Binary Search - GeeksforGeeks", "url": "https://www.geeksforgeeks.org/binary-search/" }
+      ]
+    },
+    "upvotes": 42,
+    "downvotes": 3,
+    "publishedAt": "2024-01-15T10:00:00Z"
+  },
+  {
+    "_id": "2",
+    "title": "How do you design a URL shortener like bit.ly?",
+    "slug": "design-url-shortener",
+    "category": "system-design",
+    "tags": ["system-design", "scalability", "hashing"],
+    "excerpt": "Designing a URL shortener involves understanding hashing, database design, and handling high traffic...",
+    "body": "This is a classic system design interview question that tests your ability to design scalable systems.",
+    "answer": {
+      "body": "**Key Components:**\n\n1. **URL Encoding**\n   - Use Base62 encoding (a-z, A-Z, 0-9)\n   - 6 characters = 62^6 = ~56 billion unique URLs\n\n2. **Database Design**\n   - Table: short_url, original_url, created_at, user_id\n   - Index on short_url for fast lookups\n\n3. **Architecture**\n   - Load balancer for traffic distribution\n   - Application servers (stateless)\n   - Database with read replicas\n   - Cache layer (Redis) for popular URLs\n\n4. **Handling Collisions**\n   - Check if short URL exists before saving\n   - Use auto-increment ID + Base62 conversion\n\n**Traffic Estimates:**\n- 100M URLs/month = ~40 URLs/second\n- Read:Write ratio typically 100:1",
+      "resources": [
+        { "title": "System Design Primer", "url": "https://github.com/donnemartin/system-design-primer" }
+      ]
+    },
+    "upvotes": 38,
+    "downvotes": 2,
+    "publishedAt": "2024-01-14T09:00:00Z"
+  },
+  {
+    "_id": "3",
+    "title": "What is the difference between REST and GraphQL?",
+    "slug": "rest-vs-graphql",
+    "category": "web-dev",
+    "tags": ["api", "rest", "graphql", "web-development"],
+    "excerpt": "REST and GraphQL are two popular approaches to building APIs, each with its own strengths...",
+    "body": "Understanding the differences between REST and GraphQL helps you choose the right approach for your project.",
+    "answer": {
+      "body": "**REST (Representational State Transfer)**\n- Multiple endpoints for different resources\n- Fixed data structure per endpoint\n- Over-fetching or under-fetching common\n- Caching is straightforward (HTTP caching)\n\n**GraphQL**\n- Single endpoint for all queries\n- Client specifies exact data needed\n- No over-fetching or under-fetching\n- More complex caching\n\n**When to use REST:**\n- Simple CRUD operations\n- Caching is important\n- Team is familiar with REST\n\n**When to use GraphQL:**\n- Complex data requirements\n- Multiple clients need different data\n- Rapid frontend development",
+      "resources": [
+        { "title": "GraphQL vs REST", "url": "https://www.apollographql.com/blog/graphql-vs-rest" }
+      ]
+    },
+    "upvotes": 29,
+    "downvotes": 1,
+    "publishedAt": "2024-01-13T14:00:00Z"
+  },
+  {
+    "_id": "4",
+    "title": "Explain ACID properties in databases",
+    "slug": "acid-properties-databases",
+    "category": "database",
+    "tags": ["database", "transactions", "sql"],
+    "excerpt": "ACID properties ensure reliable processing of database transactions...",
+    "body": "ACID is a set of properties that guarantee database transactions are processed reliably.",
+    "answer": {
+      "body": "**ACID stands for:**\n\n**Atomicity**\n- Transaction is all-or-nothing\n- If any part fails, entire transaction rolls back\n\n**Consistency**\n- Database moves from one valid state to another\n- All rules and constraints are maintained\n\n**Isolation**\n- Concurrent transactions don't interfere\n- Each transaction sees consistent data\n\n**Durability**\n- Once committed, changes are permanent\n- Survives system crashes\n\n**Example:**\n```sql\nBEGIN TRANSACTION;\n  UPDATE accounts SET balance = balance - 100 WHERE id = 1;\n  UPDATE accounts SET balance = balance + 100 WHERE id = 2;\nCOMMIT;\n```\nIf either UPDATE fails, both are rolled back (Atomicity).",
+      "resources": [
+        { "title": "ACID Properties - PostgreSQL", "url": "https://www.postgresql.org/docs/current/tutorial-transactions.html" }
+      ]
+    },
+    "upvotes": 35,
+    "downvotes": 2,
+    "publishedAt": "2024-01-12T11:00:00Z"
+  },
+  {
+    "_id": "5",
+    "title": "How does Docker differ from virtual machines?",
+    "slug": "docker-vs-virtual-machines",
+    "category": "devops",
+    "tags": ["docker", "containers", "virtualization", "devops"],
+    "excerpt": "Docker containers and VMs both provide isolation but work very differently...",
+    "body": "Understanding containerization vs virtualization is key to modern DevOps practices.",
+    "answer": {
+      "body": "**Virtual Machines**\n- Run complete OS with kernel\n- Heavy resource usage (GB of RAM)\n- Slow startup (minutes)\n- Strong isolation\n- Managed by hypervisor\n\n**Docker Containers**\n- Share host OS kernel\n- Lightweight (MB of RAM)\n- Fast startup (seconds)\n- Process-level isolation\n- Managed by container runtime\n\n**Key Differences:**\n\n| Aspect | VM | Docker |\n|--------|----|---------|\n| Size | GBs | MBs |\n| Startup | Minutes | Seconds |\n| Isolation | Hardware-level | Process-level |\n| OS | Full OS | Shared kernel |\n\n**When to use VMs:**\n- Need different OS\n- Strong security isolation required\n\n**When to use Docker:**\n- Microservices\n- CI/CD pipelines\n- Development environments",
+      "resources": [
+        { "title": "Docker Documentation", "url": "https://docs.docker.com/get-started/overview/" }
+      ]
+    },
+    "upvotes": 31,
+    "downvotes": 1,
+    "publishedAt": "2024-01-11T16:00:00Z"
+  }
+]

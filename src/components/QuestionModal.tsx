@@ -1,8 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import { PortableText } from '@portabletext/react'
-import { portableTextComponents } from './PortableTextComponents'
 import VoteButtons from './VoteButtons'
 import { Question, CATEGORIES } from '@/lib/types'
 
@@ -83,11 +81,8 @@ export default function QuestionModal({ question, onClose }: QuestionModalProps)
 
                 {/* Question Body */}
                 {question.body && (
-                  <div className="prose prose-scaler mb-6 text-sm">
-                    <PortableText
-                      value={question.body}
-                      components={portableTextComponents}
-                    />
+                  <div className="prose prose-scaler mb-6 text-sm text-scaler-gray whitespace-pre-wrap">
+                    {question.body}
                   </div>
                 )}
 
@@ -129,11 +124,8 @@ export default function QuestionModal({ question, onClose }: QuestionModalProps)
                 </h2>
 
                 {/* Answer Body */}
-                <div className="prose prose-scaler max-w-none text-sm">
-                  <PortableText
-                    value={question.answer.body}
-                    components={portableTextComponents}
-                  />
+                <div className="prose prose-scaler max-w-none text-sm text-scaler-gray whitespace-pre-wrap">
+                  {question.answer.body}
                 </div>
 
                 {/* Resources */}

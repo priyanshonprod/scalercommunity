@@ -5,32 +5,45 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import SearchBar from '@/components/SearchBar'
 import QuestionCard from '@/components/QuestionCard'
 import QuestionModal from '@/components/QuestionModal'
+import LeadFormModal from '@/components/LeadFormModal'
+import MasterclassWidget from '@/components/MasterclassWidget'
 import { Question, CATEGORIES } from '@/lib/types'
-import { mockQuestions } from '@/lib/mockData'
+import { fetchQuestionsFromSheet } from '@/lib/sheets'
 
 type SortOption = 'newest' | 'votes' | 'oldest'
 
 function KnowledgeContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
+  const [allQuestions, setAllQuestions] = useState<Question[]>([])
   const [questions, setQuestions] = useState<Question[]>([])
   const [loading, setLoading] = useState(true)
   const [sortBy, setSortBy] = useState<SortOption>('newest')
   const [selectedCategory, setSelectedCategory] = useState<string>('')
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isLeadFormOpen, setIsLeadFormOpen] = useState(false)
+
+  // Fetch questions from Google Sheets on mount
+  useEffect(() => {
+    async function loadQuestions() {
+      const data = await fetchQuestionsFromSheet()
+      setAllQuestions(data)
+    }
+    loadQuestions()
+  }, [])
 
   // Check for question in URL on mount
   useEffect(() => {
     const questionSlug = searchParams.get('q')
-    if (questionSlug) {
-      const question = mockQuestions.find(q => q.slug === questionSlug)
+    if (questionSlug && allQuestions.length > 0) {
+      const question = allQuestions.find(q => q.slug === questionSlug)
       if (question) {
         setSelectedQuestion(question)
         setIsModalOpen(true)
       }
     }
-  }, [searchParams])
+  }, [searchParams, allQuestions])
 
   useEffect(() => {
     const searchQuery = searchParams.get('search')?.toLowerCase() || ''
@@ -38,7 +51,7 @@ function KnowledgeContent() {
 
     setSelectedCategory(category)
 
-    let filtered = mockQuestions
+    let filtered = allQuestions
 
     if (searchQuery) {
       filtered = filtered.filter(
@@ -75,7 +88,7 @@ function KnowledgeContent() {
     }, 200)
 
     return () => clearTimeout(timer)
-  }, [searchParams, sortBy])
+  }, [searchParams, sortBy, allQuestions])
 
   const handleCategoryChange = (category: string) => {
     const params = new URLSearchParams(searchParams.toString())
@@ -115,15 +128,14 @@ function KnowledgeContent() {
           <aside className="lg:col-span-3 space-y-6">
             {/* Community Info */}
             <div className="bg-white border border-gray-200 p-4">
-              <h3 className="font-semibold text-scaler-dark mb-3">About This Community</h3>
+              <h3 className="font-semibold text-scaler-dark mb-3">About Scaler Knowledge Hub</h3>
               <p className="text-sm text-scaler-gray mb-4">
-                Scaler Knowledge Hub is a curated Q&A platform for developers preparing for tech interviews.
-                Get expert answers on DSA, System Design, and more.
+                Get honest answers to your questions about Scaler Academy - fees, placements, curriculum, and more from real experiences.
               </p>
               <div className="text-sm text-scaler-gray-light">
                 <div className="flex justify-between mb-2">
                   <span>Questions</span>
-                  <span className="font-medium text-scaler-dark">{mockQuestions.length}</span>
+                  <span className="font-medium text-scaler-dark">{allQuestions.length}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Categories</span>
@@ -251,14 +263,12 @@ function KnowledgeContent() {
               <p className="text-scaler-gray-light mb-4">
                 Join 500,000+ learners who transformed their careers with Scaler
               </p>
-              <a
-                href="https://www.scaler.com"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setIsLeadFormOpen(true)}
                 className="inline-block bg-scaler-blue hover:bg-scaler-blue-dark px-6 py-3 font-medium transition-colors"
               >
                 Know More About Scaler
-              </a>
+              </button>
             </div>
           </main>
 
@@ -333,7 +343,7 @@ function KnowledgeContent() {
             <div className="bg-white border border-gray-200 p-4">
               <h3 className="font-semibold text-scaler-dark mb-3">Popular Tags</h3>
               <div className="flex flex-wrap gap-2">
-                {['algorithms', 'system-design', 'react', 'interview', 'dsa', 'javascript'].map((tag) => (
+                {['scaler', 'fees', 'placements', 'worth', 'investment', 'reviews', 'salary', 'mentors'].map((tag) => (
                   <span
                     key={tag}
                     className="px-2 py-1 text-xs bg-gray-100 text-scaler-gray hover:bg-scaler-blue/10 hover:text-scaler-blue cursor-pointer transition-colors"
@@ -354,6 +364,14 @@ function KnowledgeContent() {
           onClose={handleCloseModal}
         />
       )}
+
+      {/* Lead Form Modal */}
+      {isLeadFormOpen && (
+        <LeadFormModal onClose={() => setIsLeadFormOpen(false)} />
+      )}
+
+      {/* Floating Masterclass Widget */}
+      <MasterclassWidget />
     </div>
   )
 }

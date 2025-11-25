@@ -6,8 +6,8 @@ import { schemaTypes } from './src/sanity/schemas'
 export default defineConfig({
   name: 'scaler-knowledge-hub',
   title: 'Scaler Knowledge Hub',
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id',
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
+  projectId: 'zxidsd1b',
+  dataset: 'production',
   plugins: [structureTool(), visionTool()],
   schema: {
     types: schemaTypes,

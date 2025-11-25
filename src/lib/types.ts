@@ -29,12 +29,11 @@ export interface Vote {
 }
 
 export const CATEGORIES: Record<string, string> = {
-  'dsa': 'Data Structures & Algorithms',
-  'system-design': 'System Design',
-  'web-dev': 'Web Development',
-  'database': 'Database',
-  'devops': 'DevOps',
-  'languages': 'Programming Languages',
-  'career': 'Career',
-  'interview': 'Interview Prep',
+  'career': 'All Questions',
+  'fees': 'Fees & Investment',
+  'placements': 'Placements & Jobs',
+  'curriculum': 'Curriculum & Learning',
+  'reviews': 'Reviews & Testimonials',
+  'eligibility': 'Eligibility & Requirements',
+  'comparison': 'Comparisons',
 }
