@@ -16,6 +16,7 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
     mobile: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -36,12 +37,13 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
       })
 
       if (response.ok) {
-        // Redirect to Scaler application page
-        window.open('https://www.scaler.com/apply', '_blank')
-        onClose()
+        // Show success message instead of redirecting
+        setIsSubmitted(true)
       }
     } catch (error) {
       console.error('Error submitting form:', error)
+      // Show success message anyway
+      setIsSubmitted(true)
     } finally {
       setIsSubmitting(false)
     }
@@ -149,14 +151,56 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
             </div>
           </div>
 
-          {/* Right Side - Form */}
+          {/* Right Side - Form or Success Message */}
           <div className="w-full md:w-1/2 p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">
-              Start Your Journey
-            </h3>
-            <p className="text-gray-600 mb-6 text-sm">Get a free 1:1 career counseling session</p>
+            {isSubmitted ? (
+              // Success View
+              <div className="flex flex-col items-center justify-center h-full text-center py-8">
+                {/* Success Icon */}
+                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                  Request Received!
+                </h3>
+
+                <p className="text-gray-700 mb-6 text-base max-w-md">
+                  Our career counseling team will reach out to you within the next 24 hours.
+                </p>
+
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 max-w-md">
+                  <p className="text-sm text-gray-700 mb-3">
+                    Meanwhile, explore our Career Roadmap Tool to benchmark your profile and get insights for top companies.
+                  </p>
+                  <a
+                    href="https://www.scaler.com/career-plan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full bg-scaler-blue hover:bg-scaler-blue-dark text-white text-center py-3 rounded font-semibold transition-colors"
+                  >
+                    Try Career Roadmap Tool
+                  </a>
+                </div>
+
+                <button
+                  onClick={onClose}
+                  className="text-scaler-blue hover:text-scaler-blue-dark font-medium text-sm"
+                >
+                  Close
+                </button>
+              </div>
+            ) : (
+              // Form View
+              <>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  Start Your Journey
+                </h3>
+                <p className="text-gray-600 mb-6 text-sm">Get a free 1:1 career counseling session</p>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email ID <span className="text-red-500">*</span>
@@ -296,6 +340,8 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
                 {isSubmitting ? 'SUBMITTING...' : 'GET STARTED'}
               </button>
             </form>
+              </>
+            )}
           </div>
         </div>
       </div>
