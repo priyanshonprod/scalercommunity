@@ -129,9 +129,19 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
                 <p className="text-white text-sm font-semibold mb-2">Join 50,000+ successful learners</p>
                 <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 border-2 border-white"></div>
-                    ))}
+                    {/* Profile photos with initials */}
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white flex items-center justify-center">
+                      <span className="text-white text-xs font-semibold">AK</span>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-white flex items-center justify-center">
+                      <span className="text-white text-xs font-semibold">PS</span>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white flex items-center justify-center">
+                      <span className="text-white text-xs font-semibold">RJ</span>
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 border-2 border-white flex items-center justify-center">
+                      <span className="text-white text-xs font-semibold">SK</span>
+                    </div>
                   </div>
                   <span className="text-yellow-400 text-xs">★★★★★ 4.8/5</span>
                 </div>
@@ -204,19 +214,32 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
                     value={formData.jobTitle}
                     onChange={(e) => setFormData({ ...formData, jobTitle: e.target.value })}
                   >
-                    <option value="">Select</option>
-                    <option value="student">Student</option>
-                    <option value="fresher">Fresher (0-1 years)</option>
-                    <option value="software-engineer">Software Engineer</option>
-                    <option value="sde1">SDE 1</option>
-                    <option value="sde2">SDE 2</option>
-                    <option value="senior-engineer">Senior Engineer</option>
-                    <option value="lead-engineer">Lead Engineer</option>
-                    <option value="engineering-manager">Engineering Manager</option>
-                    <option value="product-manager">Product Manager</option>
-                    <option value="data-scientist">Data Scientist</option>
-                    <option value="ml-engineer">ML Engineer</option>
-                    <option value="other">Other</option>
+                    <option value="">Select Job title</option>
+                    <option value="Engineering Leadership">Engineering Leadership</option>
+                    <option value="Software Development Engineer (Backend)">Software Development Engineer (Backend)</option>
+                    <option value="Software Development Engineer (Frontend)">Software Development Engineer (Frontend)</option>
+                    <option value="Software Development Engineer (Full Stack)">Software Development Engineer (Full Stack)</option>
+                    <option value="Data Scientist">Data Scientist</option>
+                    <option value="Android Engineer">Android Engineer</option>
+                    <option value="iOS Engineer">iOS Engineer</option>
+                    <option value="Devops Engineer">Devops Engineer</option>
+                    <option value="Support Engineer">Support Engineer</option>
+                    <option value="Research Engineer">Research Engineer</option>
+                    <option value="Engineering Intern">Engineering Intern</option>
+                    <option value="QA Engineer">QA Engineer</option>
+                    <option value="Co-founder">Co-founder</option>
+                    <option value="SDET">SDET</option>
+                    <option value="Product Manager">Product Manager</option>
+                    <option value="Product Designer">Product Designer</option>
+                    <option value="Backend Architect">Backend Architect</option>
+                    <option value="Program Manager">Program Manager</option>
+                    <option value="Release Engineer">Release Engineer</option>
+                    <option value="Security Leadership">Security Leadership</option>
+                    <option value="Database Administrator">Database Administrator</option>
+                    <option value="Data Analyst">Data Analyst</option>
+                    <option value="Data Engineer">Data Engineer</option>
+                    <option value="Non Coder">Non Coder</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
                 <div>
@@ -231,10 +254,9 @@ export default function LeadFormModal({ onClose }: LeadFormModalProps) {
                   >
                     <option value="">Select Program</option>
                     <option value="scaler-academy">Scaler Academy</option>
-                    <option value="scaler-dsml">Data Science & ML</option>
-                    <option value="scaler-neovarsity">Scaler Neovarsity</option>
-                    <option value="scaler-topics">Scaler Topics</option>
-                    <option value="intervie wbit">InterviewBit</option>
+                    <option value="data-science-ml">Data Science and Machine Learning</option>
+                    <option value="devops">DevOps</option>
+                    <option value="ai-ml">AI and ML</option>
                   </select>
                 </div>
               </div>

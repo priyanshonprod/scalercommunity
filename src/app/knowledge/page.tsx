@@ -74,7 +74,10 @@ function KnowledgeContent() {
     }
 
     if (category) {
-      filtered = filtered.filter((q) => q.category === category)
+      // Filter by tags instead of category
+      filtered = filtered.filter((q) =>
+        q.tags.some(tag => tag.toLowerCase() === category.toLowerCase())
+      )
     }
 
     // Sort questions
@@ -159,6 +162,17 @@ function KnowledgeContent() {
             <div className="bg-white border border-gray-200 p-4">
               <h3 className="font-semibold text-scaler-dark mb-3">Filter by Topic</h3>
               <div className="space-y-1">
+                {/* All Questions option */}
+                <button
+                  onClick={() => handleCategoryChange('')}
+                  className={`w-full text-left px-3 py-2 text-sm transition-colors ${
+                    selectedCategory === ''
+                      ? 'bg-scaler-blue/10 text-scaler-blue font-medium'
+                      : 'text-scaler-gray hover:bg-gray-100'
+                  }`}
+                >
+                  All Questions
+                </button>
                 {Object.entries(CATEGORIES).map(([key, label]) => (
                   <button
                     key={key}
@@ -171,6 +185,22 @@ function KnowledgeContent() {
                   >
                     {label}
                   </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Popular Tags */}
+            <div className="bg-white border border-gray-200 p-4">
+              <h3 className="font-semibold text-scaler-dark mb-3">Popular Tags</h3>
+              <div className="flex flex-wrap gap-2">
+                {['scaler', 'fees', 'placements', 'worth', 'investment', 'reviews', 'salary', 'mentors'].map((tag) => (
+                  <span
+                    key={tag}
+                    onClick={() => handleCategoryChange(tag)}
+                    className="px-2 py-1 text-xs bg-gray-100 text-scaler-gray hover:bg-scaler-blue/10 hover:text-scaler-blue cursor-pointer transition-colors"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
             </div>
@@ -345,21 +375,6 @@ function KnowledgeContent() {
                 >
                   Build Your Roadmap
                 </a>
-              </div>
-            </div>
-
-            {/* Popular Tags */}
-            <div className="bg-white border border-gray-200 p-4">
-              <h3 className="font-semibold text-scaler-dark mb-3">Popular Tags</h3>
-              <div className="flex flex-wrap gap-2">
-                {['scaler', 'fees', 'placements', 'worth', 'investment', 'reviews', 'salary', 'mentors'].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-1 text-xs bg-gray-100 text-scaler-gray hover:bg-scaler-blue/10 hover:text-scaler-blue cursor-pointer transition-colors"
-                  >
-                    {tag}
-                  </span>
-                ))}
               </div>
             </div>
           </aside>
