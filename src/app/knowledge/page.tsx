@@ -301,7 +301,7 @@ function KnowledgeContent() {
                   </li>
                 </ul>
                 <a
-                  href="https://www.scaler.com/apply"
+                  href="https://www.scaler.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full bg-scaler-blue hover:bg-scaler-blue-dark text-white text-center py-2 text-sm font-medium transition-colors"
