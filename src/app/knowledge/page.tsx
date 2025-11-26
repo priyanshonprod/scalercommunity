@@ -29,7 +29,7 @@ function KnowledgeContent() {
     if (container && container.children.length === 0) {
       const button = document.createElement('button')
       button.className = 'bg-scaler-blue hover:bg-scaler-blue-dark px-6 py-2 rounded font-medium transition-colors whitespace-nowrap'
-      button.textContent = 'Request Free Career Call'
+      button.textContent = 'Request Free 1:1 Career Call'
       button.onclick = () => setIsLeadFormOpen(true)
       container.appendChild(button)
     }
@@ -301,7 +301,7 @@ function KnowledgeContent() {
                   </li>
                 </ul>
                 <a
-                  href="https://www.scaler.com/events"
+                  href="https://www.scaler.com/apply"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full bg-scaler-blue hover:bg-scaler-blue-dark text-white text-center py-2 text-sm font-medium transition-colors"
